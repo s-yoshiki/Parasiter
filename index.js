@@ -1,5 +1,5 @@
-    enchant();
-    main();
+enchant();
+main();
 
 function main(){
 var SCREEN_WIDTH = 640;
@@ -23,11 +23,13 @@ var rainbow_img ="http://jsrun.it/assets/8/s/3/K/8s3KS.png";
 var new_record_img = "http://jsrun.it/assets/V/N/g/I/VNgIH.png";
 
 var audio = new Audio("http://jsrun.it/assets/u/A/D/t/uADtK.mp3");
+
 function audioPlayer(){
     audio.load();
     audio.play();
     audio.answer=false;
 }
+
 audio.answer = true;
 //localStorage.removeItem("parasiter_score");
 var scoreX = 0;
@@ -51,7 +53,7 @@ window.onload = function () {
     game.loadingScene.backgroundColor = "black";
     game.fps = 32;
     game.tick = 0;
-    
+
     game.onload = function() {
         global_color = true;
         var scene = game.rootScene;
@@ -62,7 +64,7 @@ window.onload = function () {
         Parasiter.scale(1.3);
         Parasiter.moveTo(135,300);
         scene.addChild(Parasiter);
-        
+
         var tap_to_start = new Sprite(300,100);
         tap_to_start.image = game.assets[tap_to_start_img];
         tap_to_start.scale(1);
@@ -81,14 +83,14 @@ window.onload = function () {
             }
         });
         scene.addChild(finger);
-        
+
         var label = new Label();
         label.text = "●";
         label.color ="white";
         label.font = "25px monospace";
         label.moveTo(250, 75);
         scene.addChild(label);
-        
+
         var score_label = new Label();
         score_label.text = "BEST SCORE   "+score+"mm";
         score_label.color = "white";
@@ -96,16 +98,16 @@ window.onload = function () {
         score_label.width =600;
         score_label.moveTo(72,108);
         scene.addChild(score_label);
-        
-        
-        
+
+
+
         var rainbow = new Sprite(300,100);
         rainbow.image = game.assets[rainbow_img];
         rainbow.scale(0.5);
         rainbow.moveTo(380,650);
         rainbow.addEventListener(Event.TOUCH_START,function(){
             global_color = false;
-        
+
         });
         if(score>=1000){
             scene.addChild(rainbow);
@@ -114,16 +116,16 @@ window.onload = function () {
         best.image = game.assets[best_img];
         best.moveTo(-70,700);
         scene.addChild(best);*/
-    
+
     };
-    
+
     game.Scene1 = function(){
         var scene = new Scene();
-        
+
         scene.backgroundColor = "black";
-      
-                
-        
+
+
+
         var surface = new Surface(10, 10);
         surface.context.fillStyle ="black";
         surface.context.fillRect(0, 0, 10, 10);
@@ -131,12 +133,12 @@ window.onload = function () {
         topPlayer.moveTo(250, 75);
         topPlayer.image = surface;
         scene.addChild(topPlayer);
-        
+
         var new_record = new Sprite(300,100);
         new_record.image=game.assets[new_record_img];
         new_record.moveTo(170,200);
-        
-                                     
+
+
         var gameOver = new Sprite(600,200);
         gameOver.image = game.assets[gameOver_img];
         gameOver.scale(1);
@@ -152,12 +154,12 @@ window.onload = function () {
             if(topPlayer.y>=880){
                 scene.addChild(gameOver);
                 scene.addChild(makeMessage(" "));
-                
+
                 if(audio.anwer ===true){
                     audioPlayer();
                 }
-                
-                
+
+
                 if(score*10<=scoreX*10){
                     scene.addChild(new_record);
                     score = scoreX;
@@ -165,7 +167,7 @@ window.onload = function () {
                     localStorage.setItem("parasiter_score",score);
                 }
                 localStorage.setItem("parasiter_score",score);
-                
+
                 scene.ontouchstart = function() {
                     window.location.reload();
                     //game.pushScene(game.rootScene());
@@ -196,18 +198,18 @@ window.onload = function () {
                 }
                 this.tick ++;
                 if((this.x < -50)||(this.tick > 500)){
-                    
+
                     scene.removeChild(this);
                 }
                 if(topPlayer.intersect(this)){
                     if(ANSWER===0){
-                        
+
                         ANSWER = 1;
                     }
                     scene.removeChild(this);
                     SPEED=0;
                 }
-            }); 
+            });
         }
         function addEnemy2(color){
             var randX = randfloat(50,50);
@@ -231,20 +233,20 @@ window.onload = function () {
                     scene.removeChild(this);
                 }
                 if(topPlayer.intersect(this)){
-                    
+
                         ANSWER = 1;
-                    
-                    
+
+
                     scene.removeChild(this);
                     SPEED = 0;
                 }
             });
         }
-        
+
         function timer1(text){
             var label = new Label();
             label.font = "40px 'Lucida Grande', Meiryo, sans-serif";
-            
+
             if(SPEED===0){
                 label.color="red";
             }
@@ -266,7 +268,7 @@ window.onload = function () {
         function timer2(text){
             var label = new Label();
             label.font = "40px 'Lucida Grande', Meiryo, sans-serif";
-            
+
             if(SPEED===0){
                 label.color="black";
             }else{
@@ -275,7 +277,7 @@ window.onload = function () {
             label.x    = 502;
             label.y    = 27;
             label.text = text;//"●";
-            
+
             scene.addChild(label);
             label.tick = 0;
             label.addEventListener(Event.ENTER_FRAME,function(){
@@ -312,9 +314,9 @@ window.onload = function () {
         };
         scene.onenterframe = function() {
         };
-        
+
         scene.addEventListener(Event.ENTER_FRAME,function(){
-            
+
             var r,g,b,color,x,y,text1,text2;
             r = rand(256);
             b = rand(256);
@@ -330,41 +332,41 @@ window.onload = function () {
             if(ANSWER ===1){
 
             }
-            
-            
+
+
             if((game.tick % 10) === 0){
-               
+
                 addEnemy(color);
                 addEnemy2(color);
             }
             if ((game.tick % 1) === 0){
-                
+
                 x = 250;
                 y = topPlayer.y;
                 player(x,y,color,text1);
                 timer2(text2);
                 timer1(text2);
-                
+
             }
             if ((game.tick % 100) === 0){
                 SPEED +=0.1;
             }
             game.tick++;
         });
-        
-        
+
+
         return scene;
     };
     game.start();
-    
+
 };
 
 function rand(num){
     return Math.floor(Math.random() * num);
 }
 function randfloat(min,max){
-    return Math.floor(Math.random()*(max-min))+min;    
-}  
+    return Math.floor(Math.random()*(max-min))+min;
+}
 
 
 var Player = Class.create(Sprite, {
@@ -389,17 +391,17 @@ var Player = Class.create(Sprite, {
             this.vy += 0.4;
         }
         this.y  += this.vy;
-        
+
         if(this.y>=840){
-            
+
             ANSWER = 1;
             SPEED = 0;
         }
-    
-           
-        
-            
-        
+
+
+
+
+
         if(this.y<=0){
             this.y += 0;
             this.y  = 0;
@@ -420,7 +422,5 @@ function makeMessage(text) {
     label.height = 1000;
     label.tick = 0;
     return label;
-} 
 }
-        
-        
+}
